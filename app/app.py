@@ -1,16 +1,24 @@
 import streamlit as st
 from transformers import AutoTokenizer,TFAutoModelForSequenceClassification
 import tensorflow as tf
+import os
 
 st.title("Sentiment Analysis using Distilbert")
 st.subheader("Analyze the sentiment of you text using the Distilbert model")
 
 def load_model():
-    path='/Users/prabhnoorsingh/Documents/sentiment_analysis_bert/models'
-    tok= AutoTokenizer.from_pretrained(path+ '/Tokenizer')
-    mod= TFAutoModelForSequenceClassification.from_pretrained(path + '/Model')
-    return tok,mod
+    # Get absolute path to the folder containing this script (app.py)
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    # Construct paths relative to app.py
+    tokenizer_path = os.path.join(base_path, 'Tokenizer')
+    model_path = os.path.join(base_path, 'Model')
 
+    # Load tokenizer and model from these folders
+    tok = AutoTokenizer.from_pretrained(tokenizer_path)
+    mod = TFAutoModelForSequenceClassification.from_pretrained(model_path)
+
+    return tok, mod
 tokenizer,model=load_model()
 
 def predict_sentiment(text):
