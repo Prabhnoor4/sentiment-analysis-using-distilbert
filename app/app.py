@@ -41,7 +41,7 @@ if st.button("Analyze Sentiment"):
             
             # ---- Display result ----
             st.markdown(f"**Prediction:** `{label}`")
-            # st.markdown(f"**Confidence:** `{confidence[0].max():.2f}`")  # or another way to handle the output
+            st.markdown(f"**Confidence:** `{confidence*100:.2f}%`")
 
 
 
